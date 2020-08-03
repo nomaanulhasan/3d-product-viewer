@@ -1,0 +1,16 @@
+# Blender MTL File: 'black_leather_chair.blend'
+# Material Count: 1
+
+newmtl chair
+Ns 58.314048
+Ka 1.000000 1.000000 1.000000
+Kd 0.022302 0.022302 0.022302
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Bump Chair_Normal.png
+map_Kd Chair_Basecolor.png
+map_Ns Chair_Roughness.png
+norm Chair_Normal.png

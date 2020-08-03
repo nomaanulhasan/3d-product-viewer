@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <base href="/"> <!-- /product-viewer/ -->
+        <title>3D Product Viewer</title>
+        <link rel="stylesheet" href="styles/main.css">
+    </head>
+    <body>
+        <div id="preloader">
+            <div class="loader"></div>
+        </div>
+        
+        <aside id="ctrlViewPose">
+            <nav>
+                <ul>
+                    <li class="front-view active" title="Front View"><img src="images/front-view.png" alt="Front View"></li>
+                    <li class="side1-view" title="Side 1 View"><img src="images/side1-view.png" alt="Side 1 View"></li>
+                    <li class="back-view" title="Back View"><img src="images/back-view.png" alt="Back View"></li>
+                    <li class="side2-view" title="Side 2 View"><img src="images/side2-view.png" alt="Side 2 View"></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <aside id="ctrlHelp" class="controls">
+            <i id="info">
+                <svg class="icon" viewBox="0 0 10 10" height="100%" width="100%">
+                    <path id="arrow" d="m 4.9616583,4.7853903 -0.188551,0.1834085 -0.02897,0.031201 0.02238,0.028208 0.203864,0.2012921 0.02962,0.028312 L 7.4140623,7.671875 7.6718753,7.4160156 5.2558593,5 7.6718753,2.5859375 7.4140623,2.328125 5.0000003,4.7441406 Z" />
+                    <path id="close" d="M 2.5859375,2.328125 2.328125,2.5859375 4.7441406,5 2.328125,7.4160156 2.5859375,7.671875 5,5.2578125 7.4140625,7.671875 7.671875,7.4160156 5.2558594,5 7.671875,2.5859375 7.4140625,2.328125 5,4.7441406 Z" />
+                </svg>
+            </i>
+            <div class="container">
+                <span class="col1">Touch Control</span>
+                <span class="col2">Mouse Control</span>
+                <span class="row1">Rotate</span>
+                <span class="row2">Zoom</span>
+                <span class="row3">Move</span>
+            </div>
+        </aside>
+        
+        <aside id="ctrlZoom">
+            <div class="zoomSlider">
+                <div id="zoomIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                        <path d="m368 277.332031h-90.667969v90.667969c0 11.777344-9.554687 21.332031-21.332031 21.332031s-21.332031-9.554687-21.332031-21.332031v-90.667969h-90.667969c-11.777344 0-21.332031-9.554687-21.332031-21.332031s9.554687-21.332031 21.332031-21.332031h90.667969v-90.667969c0-11.777344 9.554687-21.332031 21.332031-21.332031s21.332031 9.554687 21.332031 21.332031v90.667969h90.667969c11.777344 0 21.332031 9.554687 21.332031 21.332031s-9.554687 21.332031-21.332031 21.332031zm0 0"/>
+                    </svg>
+                </div>
+                <div id="zoomOut">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                        <path d="M355.148,273.866H156.852c-10.946,0-19.83-8.884-19.83-19.83s8.884-19.83,19.83-19.83h198.296 c10.966,0,19.83,8.884,19.83,19.83S366.114,273.866,355.148,273.866z"/>
+                    </svg>
+                </div>
+                <input type="range" id="zoomSlider" step="0.01">
+                <input type="button" id="btnReset" value="Reset">
+            </div>
+        </aside>
+
+        <main>
+            <canvas id="prdViewer"></canvas>
+        </main>
+
+        <script src="scripts/Tween.js" defer></script>
+        <script src="scripts/camera-controls.min.js" defer></script>
+        <script src="scripts/main.js" type="module" defer></script>
+
+    </body>
+</html>

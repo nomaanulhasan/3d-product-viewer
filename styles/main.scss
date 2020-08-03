@@ -1,0 +1,322 @@
+$base-color: #007db8;
+$scndry-color: #eee;
+$light-color: #fff;
+$dark-color: #000;
+$tran-ease: all 0.5s ease;
+
+* {box-sizing: border-box;}
+html, body {
+    height: 100vh;
+    overflow: hidden;
+    padding: 0;margin: 0;
+    font: normal 14px/22px arial, sans-serif;
+}
+
+@keyframes loader {
+    0% {transform: rotate(0deg);}
+    100% {transform: rotate(360deg);}
+}
+
+#preloader {
+    background: rgba($dark-color, 0.9);
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    z-index: 99;
+    left: 0;
+    top: 0;
+
+    .loader {
+        border: 5px solid $base-color;
+        background: $light-color;
+        box-sizing: border-box;
+        left: calc(50% - 50px);
+        top: calc(50% - 50px);
+        border-radius: 50%;
+        position: absolute;
+        display: block;
+        height: 100px;
+        width: 100px;
+        animation: loader 2s  infinite linear;
+
+        &::before, &::after {
+            border: 20px solid transparent;
+            border-bottom: 50px solid $base-color;
+            border-top: 50px solid $base-color;
+            height: calc(100% - 100px);
+            left: calc(50% - 20px);
+            border-radius: 50%;
+            position: absolute;
+            display: block;
+            content: "";
+            top: -5px;
+            width: 0;
+        }
+        &::after {transform: rotate(90deg);}
+    }
+}
+
+aside {
+    svg {height: 100%; width: 100%;}
+
+    &#ctrlViewPose {
+        background: $scndry-color;
+        position: fixed;
+        height: 100vh;
+        width: 100px;
+        left: 0;
+        top: 0;
+
+        @media screen and (max-width: 768px) {
+            height: 100px;
+            width: 100vw;
+            top: auto;
+            bottom: 0;
+        }
+
+        nav {
+            top: calc(50% - 200px);
+            position: absolute;
+            width: 100%;
+
+            @media screen and (max-width: 768px) {
+                width: 100vw;
+                top: 0;
+            }
+
+            ul {
+                justify-items: center;
+                align-items: center;
+                list-style: none;
+                display: grid;
+                height: 100%;
+                padding: 0;
+                margin: 0;
+                grid-template-rows: repeat(4, auto);
+                
+                @media screen and (max-width: 768px) {
+                    grid-template-rows: none;
+                    grid-template-columns: repeat(4, auto);
+                }
+
+                li {
+                    user-select: none;
+                    cursor: pointer;
+                    display: block;
+                    padding: 20px;
+                    margin: 0;
+                    transition: $tran-ease;
+
+                    &.active, &:hover, &:active {background: rgba($dark-color, 0.05);}
+                    
+                    img {
+                        pointer-events: none;
+                        display: block;
+                        height: 100%;
+                        width: 100%;
+                        border: 0;
+                    }
+                }
+            }
+        }
+    }
+
+    &#ctrlHelp {
+        background: url(../images/right_pop.png) no-repeat 0 0;
+        color: $light-color;
+        position: fixed;
+        right: -312px;
+        height: 272px;
+        width: 345px;
+        top: 5vh;
+        transition: $tran-ease;
+        @media screen and (max-width: 768px) { bottom: 1vh; }
+
+        &.visible {
+            right: 0;
+
+            @media screen and (max-width: 768px) { right: -110px; }
+        }
+
+        &.controls {
+            padding:15px 0 20px 60px;
+
+            i#info {
+                border-radius: 65px 0 0 65px;
+                top: calc(50% - 53px);
+                background: $base-color;
+                text-align: center;
+                position: absolute;
+                align-self: center;
+                line-height: 66px;
+                text-indent: 150%;
+                overflow: hidden;
+                cursor: pointer;
+                height: 66px;
+                width: 33px;
+                left: 0;
+            }
+            .icon {
+                pointer-events: none;
+                visibility: visible;
+                position: absolute;
+                fill: $light-color;
+                height: 100%;
+                width: 100%;
+                right: 2px;
+
+                transition: $tran-ease;
+            }
+            #close {visibility: hidden;}
+            &.visible {
+                .icon {
+                    width: 80%;
+                    right: 0;
+                }
+                #arrow {visibility: hidden;}
+                #close {visibility: visible;}
+            }
+
+            .container {
+                display: grid;
+                grid-template-areas: 
+                    "span col1 col2"
+                    "row1 auto auto"
+                    "row2 auto auto"
+                    "row3 auto auto"
+                ;
+                grid-template-rows:20px auto auto auto;
+                height: 100%;
+
+                span {
+                    display: grid;
+                    align-content: center;
+                    justify-content: center;
+
+                    &.col1 { grid-area: col1; }
+                    &.col2 { grid-area: col2; }
+                    &.row1 { grid-area: row1; }
+                    &.row2 { grid-area: row2; }
+                    &.row3 { grid-area: row3; }
+                }
+            }
+        }
+
+    }
+
+    &#ctrlZoom {
+        .zoomSlider {
+            border-radius: 10px 0 0 10px;
+            background: $scndry-color;
+            box-sizing: border-box;
+            position: absolute;
+            height: 220px;
+            bottom: 5vh;
+            width: 80px;
+            z-index: 1;
+            right: 0;
+            transition: $tran-ease;
+
+            @media screen and (max-width: 768px) { bottom: calc(5vh + 80px); }
+
+            #zoomIn, #zoomOut {
+                border:2px solid $base-color;
+                left: calc(50% - 12px);
+                color: $light-color;
+                border-radius: 50%;
+                position: absolute;
+                cursor: pointer;
+                margin: auto;
+                height: 24px;
+                width: 24px;
+
+                svg {fill: darken($base-color, 10%);}
+
+                &::before {
+                    background: $base-color;
+                    left: calc(50% - 4px);
+                    position: absolute;
+                    display: block;
+                    content: "";
+                    height: 3px;
+                    width: 8px;
+                }
+            }
+            #zoomOut {
+                font-size: 150%;
+                bottom: 52px;
+
+                &::before {top: -3px}
+            }
+            #zoomIn {
+                top:20px;
+
+                &::before {bottom: -3px}
+            }
+
+            #zoomSlider {
+                transform: rotate(90deg);
+                background: $base-color;
+                orientation: center;
+                position: absolute;
+                cursor: ns-resize;
+                appearance: none;
+                box-shadow: none;
+                border-radius: 0;
+                outline: 0 none;
+                border: 0 none;
+                display: block;
+                width: 100px;
+                height: 8px;
+                left: -12px;
+                z-index: 0;
+                top: 88px;
+
+                &::-webkit-slider-thumb, &::-moz-range-thumb {
+                    border: 1px solid darken($base-color, 10%);
+                    background: darken($base-color, 5%);
+                    border-radius: 2px;
+                    appearance: none;
+                    height: 20px;
+                    width: 10px;
+                }
+            }
+            #btnReset {
+                font: normal 14px/20px arial, sans-serif;
+                background: transparent;
+                color: $base-color;
+                position: absolute;
+                line-height: 20px;
+                font-weight: bold;
+                font-size: 115%;
+                cursor: pointer;
+                outline: none;
+                bottom: 18px;
+                height: 20px;
+                width: 100%;
+                padding: 0;
+                margin: 0;
+                border: 0;
+                left: 0;
+            }
+        }
+        #testRotate {
+            position: absolute;
+            top: 5vh;
+            right: 10vw;
+        }
+    }
+}
+
+main {
+    overflow: hidden;
+    display: block;
+
+    #prdViewer {
+        display: block;
+        height: 100vh;
+        width: 100vw;
+        cursor: grab;
+        z-index: 1;
+    }
+}
